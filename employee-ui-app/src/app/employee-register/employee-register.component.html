@@ -64,7 +64,11 @@
                  placeholder="dd/mm/yyyy"
                  name="dateOfBirth"
                  [formControl]="employeeForm.controls['dateOfBirth']">
-          <div *ngIf="dateOfBirth.invalid && (dateOfBirth.dirty || dateOfBirth.touched)" class="invalid-feedback">
+
+          <div *ngIf="dateOfBirth.hasError('invalidDate') && (dateOfBirth.dirty || dateOfBirth.touched)" class="invalid-feedback">
+            Please enter a valid date.
+          </div>
+          <div *ngIf="dateOfBirth.invalid && (dateOfBirth.dirty || dateOfBirth.touched) && !dateOfBirth.hasError('invalidDate')" class="invalid-feedback">
             Please enter date of birth.
           </div>
         </div>

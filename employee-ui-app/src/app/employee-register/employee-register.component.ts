@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {NgbModal, ModalDismissReasons, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
-import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {EmployeeService} from "../services/employee.service";
 
 @Component({
@@ -20,10 +20,29 @@ export class EmployeeRegisterComponent   {
       'lastName': ['',Validators.compose([Validators.required])],
       'gender': ['',Validators.compose([Validators.required])],
       'department': ['',Validators.compose([Validators.required])],
-      'dateOfBirth': ['',Validators.compose([Validators.required,Validators.pattern('^((0[1-9]|[12]\\d|3[01])\\/(0[1-9]|1[0-2])\\/[12]\\d{3})$')
-      ])],
+      'dateOfBirth': ['',Validators.compose([ Validators.required,
+                                                        Validators.pattern('^((0[1-9]|[12]\\d|3[01])\\/(0[1-9]|1[0-2])\\/[12]\\d{3})$'),
+                                                        this.dateValidator
+        ])],
     });
 
+  }
+
+  public dateValidator(control: FormControl): { [s: string]: boolean } {
+
+    if( control.value == null){
+      return {invalidDate: true};
+    }
+
+    let dateParts = control.value.split("/");
+    if(dateParts.length != 3){
+      return {invalidDate: true};
+    }
+
+    let date = new Date(parseInt(dateParts[2]), parseInt(dateParts[1]) - 1, parseInt(dateParts[0]));
+    if (!( date.getTime() <= new Date().getTime())) {
+      return {invalidDate: true};
+    }
   }
 
   get firstName() { return this.employeeForm.get('firstName'); }
