@@ -43,8 +43,8 @@ public class EmployeeTestUtils {
     public static ObjectMapper objectMapper() {
         ObjectMapper mapper = new ObjectMapper();
         SimpleModule module = new SimpleModule();
-        module.addDeserializer(LocalDate.class, new LocalDateDeserializer(ofPattern(EmployeeConfiguration.DATE_TIME_FORMAT)));
-        module.addSerializer(LocalDate.class, new LocalDateSerializer(ofPattern(EmployeeConfiguration.DATE_TIME_FORMAT)));
+        module.addDeserializer(LocalDate.class, new LocalDateDeserializer(ofPattern(EmployeeConfiguration.DATE_FORMAT)));
+        module.addSerializer(LocalDate.class, new LocalDateSerializer(ofPattern(EmployeeConfiguration.DATE_FORMAT)));
         mapper.registerModule(module);
         return mapper;
     }

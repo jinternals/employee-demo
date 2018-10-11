@@ -16,6 +16,13 @@ export class AppComponent implements OnInit{
 
   ngOnInit(){
     this.loading = true;
+    this.loadData();
+    this.employeeService.refereshEventEmitter().subscribe(event=>{
+      this.loadData();
+    });
+  }
+
+  loadData(){
     this.employeeService.loadAllEmployee() .subscribe(data => {
       this.page = data;
       this.loading = false;

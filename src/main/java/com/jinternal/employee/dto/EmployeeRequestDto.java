@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import static com.jinternal.employee.configuration.EmployeeConfiguration.DATE_FORMATTER;
-import static com.jinternal.employee.configuration.EmployeeConfiguration.DATE_TIME_FORMAT;
+import static com.jinternal.employee.configuration.EmployeeConfiguration.DATE_FORMAT;
 import static java.time.LocalDate.parse;
 
 public class EmployeeRequestDto {
@@ -27,7 +27,6 @@ public class EmployeeRequestDto {
     private String department;
 
     @NotNull
-    @Pattern(regexp = DATE_TIME_FORMAT)
     private String dateOfBirth;
 
     public String getFirstName() {

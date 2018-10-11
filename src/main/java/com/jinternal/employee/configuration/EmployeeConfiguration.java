@@ -15,15 +15,15 @@ import static java.time.format.DateTimeFormatter.ofPattern;
 @Configuration
 public class EmployeeConfiguration {
 
-    public static final String DATE_TIME_FORMAT = "dd/MM/yyyy";
-    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT);
+    public static final String DATE_FORMAT = "dd/MM/yyyy";
+    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(DATE_FORMAT);
 
     @Bean
     public ObjectMapper objectMapper() {
         ObjectMapper mapper = new ObjectMapper();
         SimpleModule module = new SimpleModule();
-        module.addDeserializer(LocalDate.class, new LocalDateDeserializer(ofPattern(DATE_TIME_FORMAT)));
-        module.addSerializer(LocalDate.class, new LocalDateSerializer(ofPattern(DATE_TIME_FORMAT)));
+        module.addDeserializer(LocalDate.class, new LocalDateDeserializer(ofPattern(DATE_FORMAT)));
+        module.addSerializer(LocalDate.class, new LocalDateSerializer(ofPattern(DATE_FORMAT)));
         mapper.registerModule(module);
         return mapper;
     }

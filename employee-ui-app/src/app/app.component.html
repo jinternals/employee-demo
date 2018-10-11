@@ -1,4 +1,7 @@
-
-<employee-register></employee-register>
-<employee-list *ngIf="!loading" [employees]="page.content"></employee-list>
-<div *ngIf="loading" class="loader center"></div>
+<div class="container">
+  <div *ngIf="!loading" class="d-flex justify-content-between">
+      <h2>Employee List</h2> <employee-register ></employee-register>
+  </div>
+  <employee-list *ngIf="!loading" [employees]="page.content"></employee-list>
+  <div *ngIf="loading" class="loader loading-image"></div>
+</div>
