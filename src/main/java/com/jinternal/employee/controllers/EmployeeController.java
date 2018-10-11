@@ -30,22 +30,22 @@ public class EmployeeController {
 
     @PostMapping("/employee")
     @ResponseBody
-    public EmployeeResponseDto saveEmployee(@RequestBody @Valid EmployeeRequestDto employeeRequestDto) {
+    public EmployeeResponseDto registerEmployee(@RequestBody @Valid EmployeeRequestDto employeeRequestDto) {
         Employee employee = employeeService.saveEmployee(fromRequest(employeeRequestDto));
         return toResponse(employee);
     }
 
     @GetMapping("/employee")
     @ResponseBody
-    public Page<EmployeeResponseDto> saveEmployee(Pageable pageable) {
+    public Page<EmployeeResponseDto> getAllEmployees(Pageable pageable) {
         Page<Employee> employeePage = employeeService.getAllEmployee(pageable);
         return toPageResponse(pageable, employeePage);
     }
 
     @PutMapping("/employee/{id}")
     @ResponseBody
-    public EmployeeResponseDto saveEmployee(@PathVariable("id") Long id,
-                                            @RequestBody @Valid EmployeeRequestDto employeeRequestDto) throws RestException {
+    public EmployeeResponseDto updateEmployee(@PathVariable("id") Long id,
+                                                @RequestBody @Valid EmployeeRequestDto employeeRequestDto) throws RestException {
         try {
             Employee employee = fromRequest(employeeRequestDto);
             employee.setId(id);
