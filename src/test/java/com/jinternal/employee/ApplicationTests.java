@@ -1,4 +1,4 @@
-package com.jinternal.employeedemo;
+package com.jinternal.employee;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class EmployeeDemoApplicationTests {
+public class ApplicationTests {
 
 	@Test
 	public void contextLoads() {
