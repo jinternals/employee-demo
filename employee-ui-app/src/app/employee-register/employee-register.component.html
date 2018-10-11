@@ -1,0 +1,71 @@
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="register-employee">Register Employee</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div *ngIf="!saving">
+      <form [formGroup]="employeeForm" (ngSubmit)="onSubmit(employeeForm.value)">
+      <div class="form-group">
+        <label for="dateOfBirth">First Name</label>
+        <div class="input-group">
+          <input id="firstName"
+                 class="form-control"
+                 placeholder="Please enter first name"
+                 name="firstName"
+                 [formControl]="employeeForm.controls['firstName']">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="dateOfBirth">First Name</label>
+        <div class="input-group">
+          <input id="lastName"
+                 class="form-control"
+                 placeholder="Please enter last Name"
+                 name="lastName"
+                 [formControl]="employeeForm.controls['lastName']">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="gender">Gender</label>
+          <select  id="gender" class="form-control" placeholder="Gender" name="gender"  [formControl]="employeeForm.controls['gender']" >
+            <option value="MALE">Male</option>
+            <option value="FEMALE">female</option>
+          </select>
+      </div>
+
+      <div class="form-group">
+        <label for="department">Department</label>
+        <div class="input-group">
+          <input id="department"
+                 class="form-control"
+                 placeholder="Please enter Department"
+                 name="department"
+                 [formControl]="employeeForm.controls['department']" >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="dateOfBirth">Date of birth</label>
+        <div class="input-group">
+          <input id="dateOfBirth"
+                 class="form-control"
+                 placeholder="yyyy-mm-dd"
+                 name="dateOfBirth"
+                 [formControl]="employeeForm.controls['dateOfBirth']" >
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-outline-dark">Save</button>
+      </div>
+    </form>
+    </div>
+    <div *ngIf="saving" class="loader center"></div>
+  </div>
+</ng-template>
+
+<button class="btn btn-outline-primary" (click)="open(content)">Register Employee</button>
