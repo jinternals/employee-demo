@@ -28,23 +28,6 @@ export class EmployeeRegisterComponent   {
 
   }
 
-  public dateValidator(control: FormControl): { [s: string]: boolean } {
-
-    if( control.value == null){
-      return {invalidDate: true};
-    }
-
-    let dateParts = control.value.split("/");
-    if(dateParts.length != 3){
-      return {invalidDate: true};
-    }
-
-    let date = new Date(parseInt(dateParts[2]), parseInt(dateParts[1]) - 1, parseInt(dateParts[0]));
-    if (!( date.getTime() <= new Date().getTime())) {
-      return {invalidDate: true};
-    }
-  }
-
   get firstName() { return this.employeeForm.get('firstName'); }
   get lastName() { return this.employeeForm.get('lastName'); }
   get gender() { return this.employeeForm.get('gender'); }
@@ -63,7 +46,7 @@ export class EmployeeRegisterComponent   {
     this.saving = true;
     this.employeeService.registerEmployee(employee).subscribe(value => {
       this.resetForm();
-      this.employeeService.refereshEventEmitter().emit(value);
+      this.employeeService.reloadMainList().emit(value);
 
     })
   }
@@ -74,5 +57,23 @@ export class EmployeeRegisterComponent   {
     this.model.close();
     this.model = null;
   }
+
+  public dateValidator(control: FormControl): { [s: string]: boolean } {
+
+    if( control.value == null){
+      return {invalidDate: true};
+    }
+
+    let dateParts = control.value.split("/");
+    if(dateParts.length != 3){
+      return {invalidDate: true};
+    }
+
+    let date = new Date(parseInt(dateParts[2]), parseInt(dateParts[1]) - 1, parseInt(dateParts[0]));
+    if (!( date.getTime() <= new Date().getTime())) {
+      return {invalidDate: true};
+    }
+  }
+
 
 }

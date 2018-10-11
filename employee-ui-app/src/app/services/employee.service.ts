@@ -6,15 +6,14 @@ import {Observable} from "rxjs";
   providedIn: 'root'
 })
 export class EmployeeService {
-  referesh: EventEmitter<any> = new EventEmitter();
+
+  refresh: EventEmitter<any> = new EventEmitter();
 
   constructor(private httpClient: HttpClient){}
-
 
   public loadAllEmployee(): Observable<Page> {
     return this.httpClient.get<Page>('/api/employee')
   }
-
 
   public registerEmployee(employee:Employee): Observable<Page> {
     const headers = new HttpHeaders({'Content-Type':'application/json; charset=utf-8'});
@@ -22,8 +21,8 @@ export class EmployeeService {
     return this.httpClient.post<Page>('/api/employee',JSON.stringify(employee),{headers:headers});
   }
 
-  public refereshEventEmitter(){
-    return this.referesh
+  public reloadMainList(){
+    return this.refresh
   }
 
 }
