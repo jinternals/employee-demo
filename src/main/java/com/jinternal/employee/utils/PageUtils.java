@@ -9,6 +9,6 @@ import org.springframework.data.domain.Pageable;
 public class PageUtils {
 
     public static PageImpl<EmployeeResponseDto> toPageResponse(Pageable pageable, Page<Employee> employee) {
-        return new PageImpl<EmployeeResponseDto>(EmployeeResponseDto.toDto(employee.getContent()), pageable, employee.getTotalElements());
+        return new PageImpl<EmployeeResponseDto>(EmployeeResponseDto.toResponse(employee.getContent()), pageable, employee.getTotalElements());
     }
 }

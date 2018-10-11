@@ -1,4 +1,4 @@
-package com.jinternal.employee.dto;
+package com.jinternal.employee.dto.exception;
 
 import java.util.ArrayList;
 import java.util.List;

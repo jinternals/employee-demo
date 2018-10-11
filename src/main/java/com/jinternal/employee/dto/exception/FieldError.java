@@ -1,4 +1,4 @@
-package com.jinternal.employee.dto;
+package com.jinternal.employee.dto.exception;
 
 public class FieldError {
 

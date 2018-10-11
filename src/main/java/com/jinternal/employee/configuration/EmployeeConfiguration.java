@@ -6,10 +6,8 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import static java.time.format.DateTimeFormatter.ofPattern;
@@ -17,8 +15,8 @@ import static java.time.format.DateTimeFormatter.ofPattern;
 @Configuration
 public class EmployeeConfiguration {
 
-    public static final String  DATE_TIME_FORMAT = "yyyy-MM-dd";
-
+    public static final String DATE_TIME_FORMAT = "dd/MM/yyyy";
+    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT);
 
     @Bean
     public ObjectMapper objectMapper() {

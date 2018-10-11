@@ -82,7 +82,7 @@ public class EmployeeResponseDto {
 
     }
 
-    public static EmployeeResponseDto toDto(Employee employee) {
+    public static EmployeeResponseDto toResponse(Employee employee) {
 
         EmployeeResponseDto employeeRequestDto = new EmployeeResponseDto();
         employeeRequestDto.setId(employee.getId());
@@ -95,10 +95,10 @@ public class EmployeeResponseDto {
         return employeeRequestDto;
     }
 
-    public static List<EmployeeResponseDto> toDto(List<Employee> employee) {
+    public static List<EmployeeResponseDto> toResponse(List<Employee> employee) {
         return employee
                 .stream()
-                .map(emp -> toDto(emp))
+                .map(emp -> toResponse(emp))
                 .collect(toList());
 
     }

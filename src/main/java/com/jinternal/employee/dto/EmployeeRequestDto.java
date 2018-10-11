@@ -6,7 +6,11 @@ import com.jinternal.employee.validators.Gender;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
+import javax.validation.constraints.Pattern;
+
+import static com.jinternal.employee.configuration.EmployeeConfiguration.DATE_FORMATTER;
+import static com.jinternal.employee.configuration.EmployeeConfiguration.DATE_TIME_FORMAT;
+import static java.time.LocalDate.parse;
 
 public class EmployeeRequestDto {
 
@@ -16,14 +20,15 @@ public class EmployeeRequestDto {
     @NotEmpty
     private String lastName;
 
-    @Gender(message = "Allowed values are MALE and FEMALE")
+    @Gender
     private String gender;
 
     @NotEmpty
     private String department;
 
     @NotNull
-    private LocalDate dateOfBirth;
+    @Pattern(regexp = DATE_TIME_FORMAT)
+    private String dateOfBirth;
 
     public String getFirstName() {
         return firstName;
@@ -57,34 +62,34 @@ public class EmployeeRequestDto {
         this.department = department;
     }
 
-    public LocalDate getDateOfBirth() {
+    public String getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(LocalDate dateOfBirth) {
+    public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public static Employee from(EmployeeRequestDto employeeRequestDto){
+    public static Employee fromRequest(EmployeeRequestDto requestDto) {
 
-       return EmployeeBuilder
-               .employee()
-               .withFirstName(employeeRequestDto.firstName)
-               .withLastName(employeeRequestDto.lastName)
-               .withGender(com.jinternal.employee.entities.Gender.valueOf(employeeRequestDto.gender))
-               .withDepartment(employeeRequestDto.department)
-               .withDateOfBirth(employeeRequestDto.dateOfBirth)
-               .build();
+        return EmployeeBuilder
+                .employee()
+                .withFirstName(requestDto.firstName)
+                .withLastName(requestDto.lastName)
+                .withGender(com.jinternal.employee.entities.Gender.valueOf(requestDto.gender))
+                .withDepartment(requestDto.department)
+                .withDateOfBirth(parse(requestDto.dateOfBirth, DATE_FORMATTER))
+                .build();
 
     }
 
-    public static EmployeeRequestDto to(Employee employee){
+    public static EmployeeRequestDto to(Employee employee) {
 
         EmployeeRequestDto employeeRequestDto = new EmployeeRequestDto();
         employeeRequestDto.setFirstName(employee.getFirstName());
         employeeRequestDto.setLastName(employee.getLastName());
         employeeRequestDto.setDepartment(employee.getDepartment());
-        employeeRequestDto.setDateOfBirth(employee.getDateOfBirth());
+        employeeRequestDto.setDateOfBirth(employee.getDateOfBirth().format(DATE_FORMATTER));
         employeeRequestDto.setGender(employee.getGender().toString());
 
         return employeeRequestDto;
