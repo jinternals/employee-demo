@@ -10,7 +10,13 @@
    cd employee-ui-app/
    ng serve --open --proxy-config proxy.conf.json
 ```
+### Links
 
+http://localhost:8080/swagger-ui.html<br>
+http://localhost:8080/h2-console<br>
+
+db: employee-db<br>
+password : sa
 
 ###  NOTE
 Pagination on ui not implemented(Api is paginated).<br> 
